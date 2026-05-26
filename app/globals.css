@@ -1,0 +1,236 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #f7f2eb;
+  --color-cream-dark: #ebe3d6;
+  --color-parchment: #f0e8dc;
+  --color-ink: #3d3429;
+  --color-ink-soft: #5c4f42;
+  --color-ink-muted: #8a7b6c;
+  --color-sage: #8b9a7e;
+  --color-sage-deep: #6b7a62;
+  --color-rose: #c4a08a;
+  --color-rose-deep: #a67c6a;
+  --color-wedding-orange: #c45c2a;
+  --color-gold: #c9a962;
+  --color-gold-soft: #e8d5a8;
+  --color-tape: #d4c4a8;
+  --color-film: #2a2622;
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-script: var(--font-allura), "Allura", cursive;
+  --font-script-lg: var(--font-great-vibes), "Great Vibes", cursive;
+  --font-body: var(--font-libre), "Libre Baskerville", Georgia, serif;
+
+  --shadow-soft: 0 4px 24px -4px rgb(61 52 41 / 0.12);
+  --shadow-lifted: 0 12px 40px -8px rgb(61 52 41 / 0.18);
+  --shadow-polaroid: 0 8px 32px -6px rgb(61 52 41 / 0.22);
+  --shadow-inset-paper: inset 0 1px 0 rgb(255 255 255 / 0.6);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-cream text-ink antialiased;
+    font-family: var(--font-body), Georgia, serif;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    @apply bg-gold-soft/60 text-ink;
+  }
+}
+
+/* Typography utilities */
+@utility type-display {
+  font-family: var(--font-display);
+  @apply text-5xl font-light tracking-wide text-ink md:text-7xl lg:text-8xl;
+  line-height: 1.05;
+}
+
+@utility type-script {
+  font-family: var(--font-script);
+  @apply text-3xl font-normal text-ink-soft md:text-4xl;
+}
+
+@utility type-script-lg {
+  font-family: var(--font-script-lg);
+  @apply text-4xl font-normal text-ink md:text-5xl lg:text-6xl;
+}
+
+@utility type-heading {
+  font-family: var(--font-display);
+  @apply text-3xl font-normal tracking-wide text-ink md:text-4xl lg:text-5xl;
+}
+
+@utility type-heading-sm {
+  font-family: var(--font-display);
+  @apply text-2xl font-normal tracking-wide text-ink md:text-3xl;
+}
+
+@utility type-subheading {
+  font-family: var(--font-display);
+  @apply text-xl font-light italic text-ink-muted md:text-2xl;
+}
+
+@utility type-body {
+  @apply text-base leading-relaxed text-ink-soft md:text-lg;
+}
+
+@utility type-body-sm {
+  @apply text-sm leading-relaxed text-ink-muted md:text-base;
+}
+
+@utility type-caption {
+  @apply text-xs uppercase tracking-[0.2em] text-ink-muted;
+}
+
+@utility type-label {
+  @apply text-xs font-medium uppercase tracking-[0.25em] text-sage-deep;
+}
+
+@utility type-monogram {
+  font-family: var(--font-display);
+  @apply text-sm tracking-[0.35em] text-ink-muted;
+}
+
+/* Paper & texture surfaces */
+@utility surface-paper {
+  background-color: var(--color-parchment);
+  background-image: url("/assets/textures/paper-grain.svg");
+  background-size: 200px 200px;
+  box-shadow: var(--shadow-inset-paper);
+}
+
+@utility surface-cream {
+  @apply bg-cream;
+  background-image: url("/assets/textures/paper-grain.svg");
+  background-size: 180px 180px;
+}
+
+/* Section spacing */
+@utility section-padding-sm {
+  @apply py-16 md:py-20;
+}
+
+@utility section-padding-md {
+  @apply py-20 md:py-28 lg:py-32;
+}
+
+@utility section-padding-lg {
+  @apply py-24 md:py-32 lg:py-40;
+}
+
+/* Composition helpers */
+@utility composition-layer {
+  @apply absolute inset-0 pointer-events-none;
+}
+
+@utility composition-content {
+  @apply relative z-10;
+}
+
+@utility scrapbook-tilt-left {
+  transform: rotate(-1.5deg);
+}
+
+@utility scrapbook-tilt-right {
+  transform: rotate(1.2deg);
+}
+
+@utility vignette-soft {
+  box-shadow: inset 0 0 120px 40px rgb(61 52 41 / 0.08);
+}
+
+/* Torn — pełna szerokość viewportu, bez dziur po bokach */
+.torn-edge-wrap {
+  box-sizing: border-box;
+}
+
+/* Poszarpane krawędzie kliszy kinowej */
+@utility film-strip-torn {
+  clip-path: polygon(
+    0% 4%,
+    2.5% 1.2%,
+    5.5% 3.4%,
+    8% 0.8%,
+    11% 2.6%,
+    14.5% 0.4%,
+    18% 3.1%,
+    22% 1%,
+    26% 2.8%,
+    30% 0.5%,
+    34% 2.2%,
+    38% 0.3%,
+    42% 1.9%,
+    46% 0.6%,
+    50% 2.5%,
+    54% 0.2%,
+    58% 1.7%,
+    62% 0.4%,
+    66% 2.3%,
+    70% 0.8%,
+    74% 1.5%,
+    78% 0.3%,
+    82% 2.1%,
+    86% 0.5%,
+    90% 1.8%,
+    94% 0.2%,
+    98% 2.4%,
+    100% 4.5%,
+    99.5% 10%,
+    100% 18%,
+    98.8% 26%,
+    100% 34%,
+    99.2% 42%,
+    100% 50%,
+    98.6% 58%,
+    100% 66%,
+    99.4% 74%,
+    100% 82%,
+    98.8% 90%,
+    100% 96%,
+    99% 100%,
+    96% 98.5%,
+    92% 100%,
+    88% 98.2%,
+    84% 99.8%,
+    80% 97.5%,
+    76% 100%,
+    72% 98.6%,
+    68% 99.9%,
+    64% 97.8%,
+    60% 100%,
+    56% 98.4%,
+    52% 99.7%,
+    48% 97.6%,
+    44% 100%,
+    40% 98.3%,
+    36% 99.6%,
+    32% 97.5%,
+    28% 100%,
+    24% 98.7%,
+    20% 99.5%,
+    16% 97.8%,
+    12% 100%,
+    8% 98.4%,
+    4% 99.8%,
+    0% 96%,
+    0.8% 88%,
+    0% 80%,
+    1.2% 72%,
+    0% 64%,
+    0.6% 56%,
+    0% 48%,
+    1% 40%,
+    0% 32%,
+    0.5% 24%,
+    0% 16%,
+    0.7% 8%
+  );
+  filter: url(#film-strip-rough-edge);
+}
