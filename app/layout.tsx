@@ -28,7 +28,7 @@ export default function RootLayout({
       lang="pl"
       className={`${fontDisplay.variable} ${fontBody.variable} ${fontScript.variable} ${fontScriptLg.variable}`}
     >
-      <body className="min-h-screen overflow-x-hidden">{children}</body>
+      <body className="min-h-screen w-full max-w-none overflow-x-hidden">{children}</body>
     </html>
   );
 }

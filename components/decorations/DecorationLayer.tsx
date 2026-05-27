@@ -38,8 +38,8 @@ export function DecorationLayer({
     <motion.div
       className={`pointer-events-none absolute ${layers.decoration} ${positionClass} ${className}`}
       aria-hidden="true"
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
     >

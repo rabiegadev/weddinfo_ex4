@@ -3,15 +3,13 @@
 import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { TornSvgOverlay } from "@/components/decorations";
 import { Container, PolaroidFrame, SectionShell } from "@/components/ui";
 import type { WeddingConfig } from "@/data/weddingData";
+import { decorations } from "@/styles/decorations";
 import { typography } from "@/styles/typography";
 
 interface WelcomeProps {
   welcome: WeddingConfig["welcome"];
-  welcomeBg: string;
-  tornFillImage: string;
 }
 
 function TapePiece({ className = "" }: { className?: string }) {
@@ -44,7 +42,7 @@ function FramedPhoto({
   );
 }
 
-export function Welcome({ welcome, welcomeBg, tornFillImage }: WelcomeProps) {
+export function Welcome({ welcome }: WelcomeProps) {
   const { title, subtitle, body, ctaLabel, ctaHref, photos, romanticIcon } = welcome;
 
   return (
@@ -53,31 +51,15 @@ export function Welcome({ welcome, welcomeBg, tornFillImage }: WelcomeProps) {
       padding="lg"
       surface="transparent"
       overflowVisible
-      className="relative isolate z-10 select-none !overflow-visible !pb-28 !pt-0 md:!pb-32 lg:!pb-36"
+      className="relative z-10 select-none overflow-x-visible !pb-28 !pt-0 -mt-px md:!pb-32 lg:!pb-36"
     >
-      {/* Tło a1 — najniżej */}
-      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
-        <Image
-          src={welcomeBg}
-          alt=""
-          fill
-          unoptimized
-          className="object-cover object-top"
-          sizes="100vw"
-          draggable={false}
-        />
-      </div>
-
-      {/* Torn — pod treścią, nad tłem */}
-      <TornSvgOverlay
-        position="top"
-        fillImage={tornFillImage}
-        variant="background"
-        maskSrc="/assets/overlays/torn-top-big.svg"
-        className="!z-[5]"
+      {/* Papier bg3 — ciągłość z hero-paper-bottom, postrzępiony dół na ~3/4 wysokości */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-[5] h-3/4 welcome-paper-top"
+        aria-hidden="true"
       />
 
-      {/* Treść — nad tornem i tłem */}
+      {/* Treść */}
       <motion.div
         className="relative z-20 pt-6 md:pt-8 lg:pt-10"
         initial={{ opacity: 0, y: 16 }}
@@ -105,7 +87,7 @@ export function Welcome({ welcome, welcomeBg, tornFillImage }: WelcomeProps) {
                     alt=""
                     width={56}
                     height={56}
-                    className="h-[clamp(2rem,5vw,3.25rem)] w-[clamp(2rem,5vw,3.25rem)] shrink-0 object-contain"
+                    className={decorations.romanticIcon}
                     draggable={false}
                   />
                 </div>
@@ -161,14 +143,14 @@ export function Welcome({ welcome, welcomeBg, tornFillImage }: WelcomeProps) {
               >
                 <a
                   href={ctaHref}
-                  className="group relative inline-flex h-[6.5rem] w-[min(94vw,28rem)] items-center justify-center md:h-[7.5rem] md:w-[32rem] lg:h-[8.25rem] lg:w-[34rem]"
+                  className={`group relative inline-flex h-[6.5rem] w-full ${decorations.brushCta} items-center justify-center md:h-[7.5rem] lg:h-[8.25rem]`}
                 >
                   <Image
                     src="/assets/decorations/brush-orang.png"
                     alt=""
                     fill
-                    sizes="(max-width: 768px) 94vw, 34rem"
-                    className="scale-110 object-fill object-center drop-shadow-sm md:scale-[1.15]"
+                    sizes="(max-width: 768px) 28rem, 34rem"
+                    className="object-fill object-center drop-shadow-sm"
                     draggable={false}
                   />
                   <span
@@ -194,7 +176,7 @@ export function Welcome({ welcome, welcomeBg, tornFillImage }: WelcomeProps) {
                 alt=""
                 width={220}
                 height={480}
-                className="h-[clamp(13rem,28vw,21rem)] w-auto object-contain opacity-95"
+                className={`${decorations.driedFlowerColumn} opacity-95`}
                 draggable={false}
               />
             </motion.div>
@@ -206,7 +188,7 @@ export function Welcome({ welcome, welcomeBg, tornFillImage }: WelcomeProps) {
                 alt=""
                 width={44}
                 height={44}
-                className="absolute right-[2%] top-[0%] z-20 h-9 w-9 object-contain opacity-90 md:h-10 md:w-10 lg:right-[4%]"
+                className={`absolute right-[2%] top-[0%] z-20 ${decorations.romanticIcon} opacity-90 lg:right-[4%]`}
                 draggable={false}
               />
 

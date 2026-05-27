@@ -1,3 +1,5 @@
+import { decorations } from "@/styles/decorations";
+
 interface FlowerOverlayProps {
   className?: string;
   variant?: "bouquet" | "single";
@@ -8,7 +10,7 @@ export function FlowerOverlay({ className = "", variant = "bouquet" }: FlowerOve
     return (
       <svg
         viewBox="0 0 80 80"
-        className={`h-16 w-16 opacity-80 md:h-20 md:w-20 ${className}`}
+        className={`${decorations.flowerSingle} opacity-80 ${className}`}
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -33,7 +35,7 @@ export function FlowerOverlay({ className = "", variant = "bouquet" }: FlowerOve
   return (
     <svg
       viewBox="0 0 120 100"
-      className={`h-20 w-24 opacity-75 md:h-28 md:w-32 ${className}`}
+      className={`${decorations.flowerBouquet} opacity-75 ${className}`}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
     >

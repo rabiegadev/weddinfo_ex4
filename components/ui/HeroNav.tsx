@@ -37,7 +37,7 @@ interface HeroNavProps {
 export function HeroNav({ className = "" }: HeroNavProps) {
   return (
     <motion.nav
-      className={`pointer-events-auto absolute inset-x-0 top-0 z-50 px-4 pt-5 md:px-8 md:pt-7 ${className}`}
+      className={`pointer-events-auto absolute inset-x-0 top-0 z-50 px-4 pt-4 md:px-8 md:pt-6 ${className}`}
       initial="hidden"
       animate="visible"
       variants={navContainer}

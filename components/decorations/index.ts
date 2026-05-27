@@ -8,7 +8,5 @@ export { FlowerWithTape } from "./FlowerWithTape";
 export { FlowerOverlay } from "./FlowerOverlay";
 export { PaperTexture } from "./PaperTexture";
 export { TapeStrip } from "./TapeStrip";
-export { TornPaper } from "./TornPaper";
-export { TornSvgOverlay } from "./TornSvgOverlay";
 export type { DecorationPosition, DecorationProps, DecorationVariant } from "./types";
 export { positionClasses } from "./types";

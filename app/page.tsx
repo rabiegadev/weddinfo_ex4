@@ -4,6 +4,8 @@ import {
   Hero,
   InfoCards,
   LocationStrip,
+  QuickSections,
+  SectionBgWrap,
   Timeline,
   Welcome,
 } from "@/components/sections";
@@ -11,10 +13,9 @@ import { weddingData } from "@/data/weddingData";
 
 export default function HomePage() {
   const heroImage = weddingData.images.hero;
-  const tornFillImage = weddingData.images.tornFill;
 
   return (
-    <main>
+    <main className="w-full max-w-none">
       <Hero
         data={{
           couple: weddingData.couple,
@@ -22,13 +23,11 @@ export default function HomePage() {
           features: weddingData.features,
         }}
         heroImage={heroImage}
-        tornFillImage={tornFillImage}
       />
-      <Welcome
-        welcome={weddingData.welcome}
-        welcomeBg={weddingData.images.welcomeBg}
-        tornFillImage={tornFillImage}
-      />
+      <SectionBgWrap bgSrc={weddingData.images.sectionBg}>
+        <Welcome welcome={weddingData.welcome} />
+        <QuickSections sections={weddingData.quickSections} />
+      </SectionBgWrap>
       <LocationStrip locations={weddingData.locations} />
       <Timeline events={weddingData.timeline} title="Harmonogram" />
       <InfoCards cards={weddingData.infoCards} />

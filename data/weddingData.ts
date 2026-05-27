@@ -29,6 +29,25 @@ export interface WeddingLocation {
   linkLabel?: string;
 }
 
+export interface HomeShortcutSection {
+  id: "informacje" | "dojazd" | "faq";
+  title: string;
+  summary: string;
+  href: "/informacje" | "/dojazd" | "/faq";
+  ctaLabel: string;
+}
+
+export interface DetailPageEntry {
+  title: string;
+  description: string;
+}
+
+export interface DetailPageContent {
+  title: string;
+  intro: string;
+  entries: DetailPageEntry[];
+}
+
 export interface WeddingConfig {
   couple: {
     partnerOne: string;
@@ -62,6 +81,12 @@ export interface WeddingConfig {
   };
   timeline: TimelineEvent[];
   infoCards: InfoCard[];
+  quickSections: HomeShortcutSection[];
+  detailPages: {
+    informacje: DetailPageContent;
+    dojazd: DetailPageContent;
+    faq: DetailPageContent;
+  };
   gallery: GalleryImage[];
   footer: {
     message: string;
@@ -78,8 +103,7 @@ export interface WeddingConfig {
   };
   images: {
     hero: string;
-    tornFill: string;
-    welcomeBg: string;
+    sectionBg: string;
   };
 }
 
@@ -205,6 +229,100 @@ export const weddingData: WeddingConfig = {
       linkLabel: "Zobacz zdjęcia",
     },
   ],
+  quickSections: [
+    {
+      id: "informacje",
+      title: "Informacje",
+      summary:
+        "Najważniejsze kwestie organizacyjne: przebieg wesela, nocleg i poprawiny.",
+      href: "/informacje",
+      ctaLabel: "Przejdź do informacji",
+    },
+    {
+      id: "dojazd",
+      title: "Dojazd",
+      summary:
+        "Krótko o transporcie i parkingach. Na podstronie znajdziesz dokładne wskazówki.",
+      href: "/dojazd",
+      ctaLabel: "Sprawdź dojazd",
+    },
+    {
+      id: "faq",
+      title: "FAQ",
+      summary:
+        "Szybkie odpowiedzi na najczęstsze pytania gości przed uroczystością.",
+      href: "/faq",
+      ctaLabel: "Zobacz FAQ",
+    },
+  ],
+  detailPages: {
+    informacje: {
+      title: "Informacje dla gości",
+      intro:
+        "Poniżej znajdziecie komplet najważniejszych informacji dotyczących dnia ślubu i kolejnego poranka.",
+      entries: [
+        {
+          title: "Wesele",
+          description:
+            "Po ceremonii zapraszamy bezpośrednio do sali weselnej. Na miejscu czeka na Was toast powitalny, kolacja i dalsza część świętowania zgodnie z harmonogramem.",
+        },
+        {
+          title: "Nocleg",
+          description:
+            "Dla gości spoza Krakowa przygotowaliśmy pulę pokoi w obiekcie weselnym oraz pobliskim pensjonacie. Szczegóły rezerwacji i numery pokoi przekażemy podczas przyjazdu.",
+        },
+        {
+          title: "Poprawiny",
+          description:
+            "Następnego dnia zapraszamy na spokojne spotkanie przy wspólnym śniadaniu i kawie. Start o 11:00 w ogrodzie przy sali weselnej.",
+        },
+      ],
+    },
+    dojazd: {
+      title: "Dojazd",
+      intro:
+        "Tu znajdziecie najważniejsze informacje, jak najwygodniej dotrzeć na ceremonię i przyjęcie.",
+      entries: [
+        {
+          title: "Samochodem",
+          description:
+            "Przy kościele oraz sali dostępne są parkingi dla gości. Prosimy o wcześniejszy wyjazd, aby mieć zapas czasu przed rozpoczęciem ceremonii.",
+        },
+        {
+          title: "Transport zorganizowany",
+          description:
+            "Po zakończeniu uroczystości w kościele będzie podstawiony bus dla gości jadących na przyjęcie. Rozkład kursów pojawi się na miejscu przy wejściu.",
+        },
+        {
+          title: "Nawigacja",
+          description:
+            "Aktualne pinezki map dla obu lokalizacji są dostępne w sekcji lokalizacji na stronie głównej. W razie problemów kontaktujcie się z nami telefonicznie.",
+        },
+      ],
+    },
+    faq: {
+      title: "FAQ",
+      intro:
+        "Najczęściej zadawane pytania, które pojawiają się przed naszym wielkim dniem.",
+      entries: [
+        {
+          title: "Czy mogę przyjechać z osobą towarzyszącą?",
+          description:
+            "Tak, jeżeli taka informacja została uwzględniona na zaproszeniu. W razie wątpliwości dajcie nam znać.",
+        },
+        {
+          title: "Czy na miejscu będzie opcja wegetariańska?",
+          description:
+            "Tak, przygotowaliśmy warianty dań specjalnych. Jeśli macie dodatkowe potrzeby żywieniowe, napiszcie do nas wcześniej.",
+        },
+        {
+          title: "Do której trwa zabawa?",
+          description:
+            "Planowana zabawa taneczna trwa do późnych godzin nocnych, a poprawiny rozpoczynamy kolejnego dnia przed południem.",
+        },
+      ],
+    },
+  },
   gallery: [
     {
       src: "/assets/images/hero.jpg",
@@ -251,7 +369,6 @@ export const weddingData: WeddingConfig = {
   },
   images: {
     hero: "/assets/images/hero.jpg",
-    tornFill: "/assets/images/bg3.png",
-    welcomeBg: "/assets/images/a1.png",
+    sectionBg: "/assets/images/bg6.jpg",
   },
 };

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { decorations } from "@/styles/decorations";
 
 interface BrushStrokeImageProps {
   className?: string;
@@ -12,7 +13,7 @@ export function BrushStrokeImage({ className = "" }: BrushStrokeImageProps) {
       alt=""
       width={1080}
       height={300}
-      className={`pointer-events-none h-auto w-full max-w-none object-contain opacity-95 ${className}`}
+      className={`pointer-events-none opacity-95 ${decorations.brushStroke} ${className}`}
       draggable={false}
     />
   );

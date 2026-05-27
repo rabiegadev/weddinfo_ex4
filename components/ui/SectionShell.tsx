@@ -11,6 +11,8 @@ interface SectionShellProps {
   surface?: "cream" | "parchment" | "transparent";
   /** Domyślnie hidden — dla sekcji z wystającymi polaroidami/taśmami ustaw true */
   overflowVisible?: boolean;
+  /** Wyłącza fade-in całej sekcji przy scrollu (np. gdy tło ma być od razu widoczne) */
+  disableEnterAnimation?: boolean;
 }
 
 const paddingMap = {
@@ -32,15 +34,23 @@ export function SectionShell({
   padding = "md",
   surface = "cream",
   overflowVisible = false,
+  disableEnterAnimation = false,
 }: SectionShellProps) {
-  const overflowClass = overflowVisible
-    ? "overflow-x-hidden overflow-y-visible"
-    : "overflow-hidden";
+  const overflowClass = overflowVisible ? "overflow-visible" : "overflow-hidden";
+  const sectionClassName = `relative ${overflowClass} ${paddingMap[padding]} ${surfaceMap[surface]} ${className}`;
+
+  if (disableEnterAnimation) {
+    return (
+      <section id={id} className={sectionClassName}>
+        {children}
+      </section>
+    );
+  }
 
   return (
     <motion.section
       id={id}
-      className={`relative ${overflowClass} ${paddingMap[padding]} ${surfaceMap[surface]} ${className}`}
+      className={sectionClassName}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-80px" }}

@@ -2,50 +2,63 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { BrushStrokeImage, FilmStripSvg, TornSvgOverlay } from "@/components/decorations";
+import { BrushStrokeImage, FilmStripSvg } from "@/components/decorations";
 import { Container, Countdown, HeroNav } from "@/components/ui";
 import type { WeddingConfig } from "@/data/weddingData";
+import { decorations } from "@/styles/decorations";
 import { layers } from "@/styles/layers";
 import { typography } from "@/styles/typography";
 
 interface HeroProps {
   data: Pick<WeddingConfig, "couple" | "date" | "features">;
   heroImage: string;
-  tornFillImage: string;
 }
 
-export function Hero({ data, heroImage, tornFillImage }: HeroProps) {
+export function Hero({ data, heroImage }: HeroProps) {
   const { couple, date, features } = data;
 
   return (
-    <header className="relative z-30 h-[100svh] max-h-[100svh] w-full overflow-hidden">
-      <motion.div
-        className={`absolute inset-0 ${layers.base}`}
-        initial={{ scale: 1.04 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <Image
-          src={heroImage}
-          alt={`${couple.displayNames} — zaproszenie ślubne`}
-          fill
-          priority
-          className="object-cover object-center"
-          sizes="100vw"
-        />
-      </motion.div>
+    <header className="relative z-30 h-[100svh] max-h-[100svh] w-full">
+      <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+        <motion.div
+          className={`absolute inset-0 ${layers.base}`}
+          initial={{ scale: 1.04 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <Image
+            src={heroImage}
+            alt=""
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        </motion.div>
 
-      <motion.div
-        className={`absolute inset-0 ${layers.texture} bg-black/25`}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.15 }}
+        <motion.div
+          className={`absolute inset-0 ${layers.texture} bg-black/25`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.15 }}
+        />
+      </div>
+
+      {/* Tło pod menu z delikatnie postrzępionym dołem */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-[35] h-[5.25rem] md:h-[6rem] lg:h-[6.25rem] hero-paper-menu"
+        aria-hidden="true"
+      />
+
+      {/* Warstwa papieru nachodząca od dołu hero */}
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[35] h-[3.25rem] md:h-[4rem] lg:h-[4.5rem] hero-paper-bottom"
         aria-hidden="true"
       />
 
       {/* Prawa strona — klisza SVG pod suszkiem */}
       <motion.div
-        className="pointer-events-none absolute inset-y-0 right-4 z-[42] w-[min(52vw,24rem)] md:right-8 lg:right-14"
+        className={`pointer-events-none absolute inset-y-0 right-4 z-[42] ${decorations.filmColumn} md:right-8 lg:right-14`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.9, delay: 0.35 }}
@@ -66,14 +79,11 @@ export function Hero({ data, heroImage, tornFillImage }: HeroProps) {
             alt=""
             width={240}
             height={360}
-            className="h-auto w-[min(38vw,12.5rem)] max-w-none -translate-x-12 -rotate-12 object-contain drop-shadow-md md:w-[min(30vw,14.5rem)] md:-translate-x-16 lg:w-[16rem] lg:-translate-x-[4.5rem]"
+            className={`${decorations.driedFlower} -translate-x-10 -rotate-12 drop-shadow-md md:-translate-x-14 lg:-translate-x-[4.5rem]`}
             draggable={false}
           />
         </motion.div>
       </motion.div>
-
-      <TornSvgOverlay position="top" fillImage={tornFillImage} fullBleed={false} />
-      <TornSvgOverlay position="bottom" fillImage={tornFillImage} fullBleed={false} />
 
       <HeroNav className={layers.tornPaper} />
 
@@ -113,7 +123,7 @@ export function Hero({ data, heroImage, tornFillImage }: HeroProps) {
             transition={{ duration: 0.8, delay: 0.55 }}
           >
             <motion.div className="relative flex min-h-[6.5rem] items-center justify-center px-16 py-5 md:min-h-[8rem] md:px-24 md:py-6">
-              <BrushStrokeImage className="absolute left-1/2 top-[calc(50%+5px)] h-[9.75rem] w-[min(100vw,58rem)] -translate-x-1/2 -translate-y-1/2 object-contain md:top-[calc(50%+6px)] md:h-[12rem] md:w-[64rem]" />
+              <BrushStrokeImage className="absolute left-1/2 top-[calc(50%+5px)] -translate-x-1/2 -translate-y-1/2 md:top-[calc(50%+6px)]" />
               <p
                 className={`${typography.label} relative z-10 text-sm !text-ink uppercase tracking-[0.22em] md:text-base md:font-semibold`}
               >

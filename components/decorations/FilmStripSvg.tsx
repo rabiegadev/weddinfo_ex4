@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { decorations } from "@/styles/decorations";
 
 interface FilmStripSvgProps {
   className?: string;
@@ -55,7 +56,7 @@ export function FilmStripSvg({ className = "" }: FilmStripSvgProps) {
         alt=""
         width={900}
         height={2400}
-        className="film-strip-torn h-[min(78svh,44rem)] w-auto max-w-none object-contain opacity-95 drop-shadow-[0_8px_28px_rgb(0_0_0/0.35)]"
+        className={`film-strip-torn ${decorations.filmStrip} opacity-95 drop-shadow-[0_8px_28px_rgb(0_0_0/0.35)]`}
         draggable={false}
       />
 
