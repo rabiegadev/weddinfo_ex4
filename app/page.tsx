@@ -1,43 +1,95 @@
 import {
+
+  DojazdSection,
+
   Footer,
-  Gallery,
+
   Hero,
-  InfoCards,
-  LocationStrip,
+
   QuickSections,
-  SectionBgWrap,
+
+  QuoteSection,
+
   Timeline,
+
+  TornPageSection,
+
   Welcome,
+
 } from "@/components/sections";
+
 import { weddingData } from "@/data/weddingData";
 
+
+
 export default function HomePage() {
-  const heroImage = weddingData.images.hero;
+
+  const { images, couple, date, features, locations, welcome, quickSections, timeline, detailPages, quote, footer } =
+
+    weddingData;
+
+
 
   return (
+
     <main className="w-full max-w-none">
+
       <Hero
-        data={{
-          couple: weddingData.couple,
-          date: weddingData.date,
-          features: weddingData.features,
-        }}
-        heroImage={heroImage}
+
+        data={{ couple, date, features, locations }}
+
+        heroImage={images.hero}
+
       />
-      <SectionBgWrap bgSrc={weddingData.images.sectionBg}>
-        <Welcome welcome={weddingData.welcome} />
-        <QuickSections sections={weddingData.quickSections} />
-      </SectionBgWrap>
-      <LocationStrip locations={weddingData.locations} />
-      <Timeline events={weddingData.timeline} title="Harmonogram" />
-      <InfoCards cards={weddingData.infoCards} />
-      {weddingData.features.showGallery && (
-        <Gallery images={weddingData.gallery} />
-      )}
+
+
+
+      <TornPageSection id="welcome-wrap" bgSrc={images.bgPrimary} tornVariant="a" className="-mt-px">
+
+        <Welcome welcome={welcome} />
+
+      </TornPageSection>
+
+
+
+      <TornPageSection id="quick-wrap" bgSrc={images.bgAlt} tornVariant="b">
+
+        <QuickSections sections={quickSections} />
+
+      </TornPageSection>
+
+
+
+      <TornPageSection id="timeline-wrap" bgSrc={images.bgPrimary} tornVariant="c">
+
+        <Timeline events={timeline} title="Harmonogram" />
+
+      </TornPageSection>
+
+
+
+      <TornPageSection id="dojazd-wrap" bgSrc={images.bgAlt} tornVariant="b">
+
+        <DojazdSection content={detailPages.dojazd} />
+
+      </TornPageSection>
+
+
+
+      <QuoteSection quote={quote} romanticIcon={welcome.romanticIcon} />
+
+
+
       <Footer
-        footer={weddingData.footer}
-        romanticIcon={weddingData.welcome.romanticIcon}
+        footer={footer}
+        couple={couple}
+        date={date}
+        bgSrc={images.bgPrimary}
       />
+
     </main>
+
   );
+
 }
+

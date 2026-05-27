@@ -93,6 +93,10 @@ export interface WeddingConfig {
     rsvpEmail?: string;
     hashtag?: string;
   };
+  quote: {
+    text: string;
+    author: string;
+  };
   meta: {
     title: string;
     description: string;
@@ -103,7 +107,8 @@ export interface WeddingConfig {
   };
   images: {
     hero: string;
-    sectionBg: string;
+    bgPrimary: string;
+    bgAlt: string;
   };
 }
 
@@ -156,7 +161,7 @@ export const weddingData: WeddingConfig = {
     },
     reception: {
       name: "Dwór w Tomaszowicach",
-      address: "Tomaszowice 1, 32-020",
+      address: "Tomaszowice",
       mapUrl: "https://maps.google.com",
       note: "Przyjęcie po ceremonii",
       linkLabel: "ZOBACZ DOJAZD",
@@ -356,7 +361,12 @@ export const weddingData: WeddingConfig = {
     },
   ],
   footer: {
-    message: "Do zobaczenia!",
+    message: "",
+  },
+  quote: {
+    text:
+      "Miłość to nie patrzenie na siebie nawzajem, lecz patrzenie razem w tym samym kierunku.",
+    author: "Antoine de Saint-Exupéry",
   },
   meta: {
     title: "Karolina & Michał — Zaproszenie ślubne",
@@ -369,6 +379,7 @@ export const weddingData: WeddingConfig = {
   },
   images: {
     hero: "/assets/images/hero.jpg",
-    sectionBg: "/assets/images/bg6.jpg",
+    bgPrimary: "/assets/images/bg4.png",
+    bgAlt: "/assets/images/bg2.jpeg",
   },
 };

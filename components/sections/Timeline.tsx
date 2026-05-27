@@ -13,7 +13,7 @@ interface TimelineProps {
 
 export function Timeline({ events, title = "Harmonogram dnia" }: TimelineProps) {
   return (
-    <SectionShell id="timeline" padding="md" surface="cream">
+    <SectionShell id="timeline" padding="md" surface="transparent" disableEnterAnimation>
       <Container size="narrow">
         <div className="text-center">
           <p className={typography.label}>Program</p>

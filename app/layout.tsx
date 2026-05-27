@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SiteChrome } from "@/components/layout/SiteChrome";
 import { weddingData } from "@/data/weddingData";
 import {
   fontBody,
@@ -28,7 +29,14 @@ export default function RootLayout({
       lang="pl"
       className={`${fontDisplay.variable} ${fontBody.variable} ${fontScript.variable} ${fontScriptLg.variable}`}
     >
-      <body className="min-h-screen w-full max-w-none overflow-x-hidden">{children}</body>
+      <body className="min-h-screen w-full max-w-none overflow-x-hidden">
+        <SiteChrome
+          partnerOne={weddingData.couple.partnerOne}
+          partnerTwo={weddingData.couple.partnerTwo}
+        >
+          {children}
+        </SiteChrome>
+      </body>
     </html>
   );
 }

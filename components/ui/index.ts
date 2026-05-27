@@ -3,4 +3,5 @@ export { Countdown } from "./Countdown";
 export { HeroNav } from "./HeroNav";
 export { InfoIcon } from "./InfoIcon";
 export { PolaroidFrame } from "./PolaroidFrame";
+export { ScrollSiteNav } from "./ScrollSiteNav";
 export { SectionShell } from "./SectionShell";

@@ -43,7 +43,7 @@ function FramedPhoto({
 }
 
 export function Welcome({ welcome }: WelcomeProps) {
-  const { title, subtitle, body, ctaLabel, ctaHref, photos, romanticIcon } = welcome;
+  const { title, subtitle, body, photos, romanticIcon } = welcome;
 
   return (
     <SectionShell
@@ -51,14 +51,8 @@ export function Welcome({ welcome }: WelcomeProps) {
       padding="lg"
       surface="transparent"
       overflowVisible
-      className="relative z-10 select-none overflow-x-visible !pb-28 !pt-0 -mt-px md:!pb-32 lg:!pb-36"
+      className="relative z-10 select-none overflow-x-visible !pb-28 !pt-0 md:!pb-32 lg:!pb-36"
     >
-      {/* Papier bg3 — ciągłość z hero-paper-bottom, postrzępiony dół na ~3/4 wysokości */}
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 z-[5] h-3/4 welcome-paper-top"
-        aria-hidden="true"
-      />
-
       {/* Treść */}
       <motion.div
         className="relative z-20 pt-6 md:pt-8 lg:pt-10"
@@ -134,32 +128,6 @@ export function Welcome({ welcome }: WelcomeProps) {
                 {body}
               </motion.p>
 
-              <motion.div
-                className="relative mx-auto mt-8 flex justify-center md:mt-9"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.25, duration: 0.5 }}
-              >
-                <a
-                  href={ctaHref}
-                  className={`group relative inline-flex h-[6.5rem] w-full ${decorations.brushCta} items-center justify-center md:h-[7.5rem] lg:h-[8.25rem]`}
-                >
-                  <Image
-                    src="/assets/decorations/brush-orang.png"
-                    alt=""
-                    fill
-                    sizes="(max-width: 768px) 28rem, 34rem"
-                    className="object-fill object-center drop-shadow-sm"
-                    draggable={false}
-                  />
-                  <span
-                    className={`${typography.label} relative z-10 px-4 !text-cream drop-shadow-[0_1px_2px_rgb(0_0_0/0.4)] transition-transform duration-300 group-hover:scale-[1.02]`}
-                  >
-                    {ctaLabel} →
-                  </span>
-                </a>
-              </motion.div>
             </motion.div>
 
             {/* Suszek */}
