@@ -37,13 +37,13 @@ export function Footer({ footer, couple, date }: FooterProps) {
             </p>
           ) : null}
 
-          <nav className="mt-2" aria-label="Nawigacja stopki">
-            <ul className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:gap-x-6">
+          <nav className="mt-3 w-full max-w-xs md:mt-2 md:max-w-none" aria-label="Nawigacja stopki">
+            <ul className="grid grid-cols-2 gap-x-3 gap-y-3 sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-6 sm:gap-y-2">
               {footerNav.map((item) => (
-                <li key={item.href}>
+                <li key={item.href} className="text-center sm:text-left">
                   <Link
                     href={item.href}
-                    className={`${typography.caption} !text-cream/80 transition-colors hover:!text-gold-soft`}
+                    className={`${typography.caption} inline-block py-1 !text-cream/80 transition-colors hover:!text-gold-soft`}
                   >
                     {item.label}
                   </Link>

@@ -70,7 +70,7 @@ export function Hero({ data, heroImage, quote, romanticIcon }: HeroProps) {
 
               priority
 
-              className="object-cover object-center"
+              className="object-cover object-left md:object-center"
 
               sizes="100vw"
 
@@ -106,7 +106,7 @@ export function Hero({ data, heroImage, quote, romanticIcon }: HeroProps) {
 
 
 
-        <div className="absolute inset-0 z-50 flex flex-col justify-between px-4 pb-6 pt-14 md:px-10 md:pb-10 md:pt-20 lg:pr-[8%]">
+        <div className="absolute inset-0 z-50 flex flex-col justify-between px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(3.5rem,env(safe-area-inset-top))] md:px-10 md:pb-10 md:pt-20 lg:pr-[8%]">
 
           <div aria-hidden="true" className="hidden min-h-0 md:block" />
 
@@ -114,7 +114,7 @@ export function Hero({ data, heroImage, quote, romanticIcon }: HeroProps) {
 
           <motion.div
 
-            className="flex flex-1 flex-col items-end justify-center"
+            className="flex flex-1 flex-col items-center justify-center md:items-end"
 
             initial={{ opacity: 0 }}
 
@@ -128,13 +128,13 @@ export function Hero({ data, heroImage, quote, romanticIcon }: HeroProps) {
 
               size="wide"
 
-              className="composition-content flex w-full max-w-3xl flex-col items-end pr-2 md:pr-6 lg:pr-10"
+              className="composition-content flex w-full max-w-3xl flex-col items-center pr-0 md:items-end md:pr-6 lg:pr-10"
 
             >
 
               <motion.h1
 
-                className="w-full max-w-xl text-right"
+                className="w-full max-w-xl text-center md:text-right"
 
                 initial={{ opacity: 0, y: 20 }}
 
@@ -144,19 +144,19 @@ export function Hero({ data, heroImage, quote, romanticIcon }: HeroProps) {
 
               >
 
-                <span className="block font-[family-name:var(--font-script-lg)] text-[clamp(3rem,10vw,5.75rem)] leading-[0.88] tracking-[0.035em] text-cream drop-shadow-[0_2px_14px_rgb(0_0_0/0.38)]">
+                <span className="block font-[family-name:var(--font-script-lg)] text-[clamp(2.5rem,11vw,5.75rem)] leading-[0.88] tracking-[0.035em] text-cream drop-shadow-[0_2px_14px_rgb(0_0_0/0.38)]">
 
                   {couple.partnerOne}
 
                 </span>
 
-                <span className="my-0.5 block pr-4 font-[family-name:var(--font-script)] text-[clamp(1.65rem,4.5vw,2.5rem)] leading-none tracking-[0.05em] text-cream drop-shadow-[0_2px_8px_rgb(0_0_0/0.3)]">
+                <span className="my-0.5 block font-[family-name:var(--font-script)] text-[clamp(1.5rem,4.5vw,2.5rem)] leading-none tracking-[0.05em] text-cream drop-shadow-[0_2px_8px_rgb(0_0_0/0.3)] md:pr-4">
 
                   &
 
                 </span>
 
-                <span className="block font-[family-name:var(--font-script-lg)] text-[clamp(3rem,10vw,5.75rem)] leading-[0.88] tracking-[0.035em] text-cream drop-shadow-[0_2px_14px_rgb(0_0_0/0.38)]">
+                <span className="block font-[family-name:var(--font-script-lg)] text-[clamp(2.5rem,11vw,5.75rem)] leading-[0.88] tracking-[0.035em] text-cream drop-shadow-[0_2px_14px_rgb(0_0_0/0.38)]">
 
                   {couple.partnerTwo}
 
@@ -212,7 +212,7 @@ export function Hero({ data, heroImage, quote, romanticIcon }: HeroProps) {
 
           <motion.div
 
-            className="w-full max-w-xl shrink-0 pt-4 md:max-w-md lg:max-w-lg"
+            className="mx-auto w-full max-w-xl shrink-0 pt-3 text-center md:mx-0 md:max-w-md md:pt-4 md:text-left lg:max-w-lg"
 
             initial={{ opacity: 0, y: 16 }}
 
@@ -224,7 +224,7 @@ export function Hero({ data, heroImage, quote, romanticIcon }: HeroProps) {
 
             <blockquote
 
-              className={`${typography.subheading} !text-base !leading-relaxed !text-cream/95 md:!text-lg lg:!text-xl`}
+              className={`${typography.subheading} !text-sm !leading-relaxed !text-cream/95 sm:!text-base md:!text-lg lg:!text-xl`}
 
             >
 
@@ -232,7 +232,7 @@ export function Hero({ data, heroImage, quote, romanticIcon }: HeroProps) {
 
             </blockquote>
 
-            <div className="mt-3 flex items-center gap-3">
+            <div className="mt-2 flex items-center justify-center gap-3 md:mt-3 md:justify-start">
 
               <p className={`${typography.caption} !text-cream/75`}>— {quote.author}</p>
 

@@ -21,7 +21,7 @@ export function Container({
 }: ContainerProps) {
   return (
     <div
-      className={`mx-auto w-full px-5 md:px-8 lg:px-12 ${sizeClasses[size]} ${className}`}
+      className={`mx-auto w-full px-4 sm:px-5 md:px-8 lg:px-12 ${sizeClasses[size]} ${className}`}
     >
       {children}
     </div>

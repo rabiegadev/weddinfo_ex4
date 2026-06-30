@@ -59,6 +59,7 @@ interface LocationCardProps {
   variant: LocationMapsVariant;
   onFocus: () => void;
   onBlur: () => void;
+  onSelect: () => void;
 }
 
 function LocationCard({
@@ -70,6 +71,7 @@ function LocationCard({
   variant,
   onFocus,
   onBlur,
+  onSelect,
 }: LocationCardProps) {
   const reduceMotion = useReducedMotion();
   const styles = variantStyles[variant];
@@ -78,11 +80,12 @@ function LocationCard({
 
   return (
     <motion.div
-      className="flex flex-col items-center"
+      className="flex w-full max-w-[13rem] flex-col items-center sm:max-w-none"
       onMouseEnter={onFocus}
       onMouseLeave={onBlur}
       onFocus={onFocus}
       onBlur={onBlur}
+      onClick={onSelect}
       animate={
         reduceMotion
           ? undefined
@@ -115,6 +118,7 @@ function LocationCard({
         href={mapLink}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={(event) => event.stopPropagation()}
         aria-label={`${location.linkLabel ?? "Otwórz mapę"} — ${location.name}`}
         className={`group/map relative mt-4 block overflow-hidden rounded-xl ring-1 transition-all ${
           isActive ? styles.mapRingActive : styles.mapRingIdle
@@ -123,7 +127,7 @@ function LocationCard({
         <iframe
           title={`Mapa — ${location.name}`}
           src={embedUrl}
-          className="pointer-events-none h-[7.5rem] w-[10.5rem] border-0 grayscale-[0.1] contrast-[1.05] md:h-[8.5rem] md:w-[12rem]"
+          className="pointer-events-none h-[7.5rem] w-full min-w-[10.5rem] border-0 grayscale-[0.1] contrast-[1.05] sm:w-[10.5rem] md:h-[8.5rem] md:w-[12rem]"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
@@ -155,7 +159,7 @@ export function LocationMapsBlock({
 
   return (
     <div className={className}>
-      <div className="mx-auto flex max-w-lg items-start justify-center gap-10 md:max-w-none md:gap-20 lg:gap-28">
+      <div className="mx-auto flex max-w-sm flex-col items-stretch gap-8 sm:max-w-none sm:flex-row sm:items-start sm:justify-center sm:gap-10 md:gap-20 lg:gap-28">
         <LocationCard
           label="Ceremonia"
           iconSrc="/assets/icons/church.png"
@@ -168,6 +172,10 @@ export function LocationMapsBlock({
             setActiveKey("ceremony");
           }}
           onBlur={() => setHoverKey(null)}
+          onSelect={() => {
+            setHoverKey("ceremony");
+            setActiveKey("ceremony");
+          }}
         />
         <LocationCard
           label="Przyjęcie weselne"
@@ -181,6 +189,10 @@ export function LocationMapsBlock({
             setActiveKey("reception");
           }}
           onBlur={() => setHoverKey(null)}
+          onSelect={() => {
+            setHoverKey("reception");
+            setActiveKey("reception");
+          }}
         />
       </div>
 

@@ -60,7 +60,7 @@ export function QuickSections({ intro }: QuickSectionsProps) {
         >
           <motion.div
             variants={reduceMotion ? undefined : cardVariants}
-            className="rounded-3xl border border-cream/12 bg-cream/[0.06] px-8 py-10 shadow-[inset_0_1px_0_rgb(255_253_250/0.1),0_24px_48px_rgb(0_0_0/0.18)] backdrop-blur-sm md:px-12 md:py-14"
+            className="rounded-3xl border border-cream/12 bg-cream/[0.06] px-6 py-8 shadow-[inset_0_1px_0_rgb(255_253_250/0.1),0_24px_48px_rgb(0_0_0/0.18)] backdrop-blur-sm sm:px-8 md:px-12 md:py-14"
           >
             <motion.p
               variants={reduceMotion ? undefined : lineVariants}
