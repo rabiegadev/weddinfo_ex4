@@ -21,12 +21,50 @@ export interface GalleryImage {
   caption?: string;
 }
 
+export interface Coordinates {
+  lat: number;
+  lng: number;
+}
+
 export interface WeddingLocation {
   name: string;
   address: string;
   mapUrl?: string;
   note?: string;
   linkLabel?: string;
+  directions: string;
+  coordinates: Coordinates;
+}
+
+export interface ReturnTransport {
+  title: string;
+  description: string;
+  note?: string;
+}
+
+export interface GuestIntro {
+  label: string;
+  title: string;
+  body: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+export interface GuestDetailsTopic {
+  id: string;
+  title: string;
+  text: string;
+}
+
+export interface GuestDetailsPage {
+  title: string;
+  intro: string;
+  topics: GuestDetailsTopic[];
+  dojazd: {
+    title: string;
+    intro: string;
+    bullets: string[];
+  };
 }
 
 export interface HomeShortcutSection {
@@ -79,8 +117,11 @@ export interface WeddingConfig {
     ceremony: WeddingLocation;
     reception: WeddingLocation;
   };
+  returnTransport: ReturnTransport;
   timeline: TimelineEvent[];
   infoCards: InfoCard[];
+  guestIntro: GuestIntro;
+  guestDetails: GuestDetailsPage;
   quickSections: HomeShortcutSection[];
   detailPages: {
     informacje: DetailPageContent;
@@ -110,6 +151,14 @@ export interface WeddingConfig {
     bgPrimary: string;
     bgAlt: string;
   };
+}
+
+export function buildMapLink({ lat, lng }: Coordinates): string {
+  return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+}
+
+export function buildMapEmbedUrl({ lat, lng }: Coordinates): string {
+  return `https://maps.google.com/maps?q=${lat},${lng}&z=15&output=embed`;
 }
 
 const ceremonyLocationName = "Kaplica św. Józefa";
@@ -154,18 +203,29 @@ export const weddingData: WeddingConfig = {
   locations: {
     ceremony: {
       name: "Kościół św. Anny",
-      address: "Kraków",
-      mapUrl: "https://maps.google.com",
+      address: "ul. św. Anny 11, Kraków",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=50.0624,19.9378",
       note: "Ceremonia o godz. 15:00",
-      linkLabel: "ZOBACZ DOJAZD",
+      linkLabel: "Otwórz w mapach",
+      coordinates: { lat: 50.0624, lng: 19.9378 },
+      directions:
+        "Kościół znajduje się w centrum Krakowa, tuż obok Rynku Głównego. Najwygodniej dojechać tramwajem (przystanek Pętla Plac Wszystkich Świętych) lub zaparkować w garażu podziemnym przy ul. Brackiej. Prosimy o przybycie ok. 20 minut przed ceremonią.",
     },
     reception: {
       name: "Dwór w Tomaszowicach",
-      address: "Tomaszowice",
-      mapUrl: "https://maps.google.com",
+      address: "Tomaszowice 12, Wieliczka",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=49.9892,20.0421",
       note: "Przyjęcie po ceremonii",
-      linkLabel: "ZOBACZ DOJAZD",
+      linkLabel: "Otwórz w mapach",
+      coordinates: { lat: 49.9892, lng: 20.0421 },
+      directions:
+        "Z centrum Krakowa jedźcie drogą 94 w kierunku Wieliczki, następnie skręćcie w Tomaszowice zgodnie z drogowskazami. Parking dla gości znajduje się bezpośrednio przy obiekcie — wjazd od strony ogrodu.",
     },
+  },
+  returnTransport: {
+    title: "Transport powrotny",
+    description:
+      "Podczas trwania wesela dostępny będzie kierowca, który może transportować gości do domów. Chęć skorzystania z transportu prosimy przekazać świadkowi lub świadkowej kilka minut wcześniej.",
   },
   timeline: [
     {
@@ -234,6 +294,73 @@ export const weddingData: WeddingConfig = {
       linkLabel: "Zobacz zdjęcia",
     },
   ],
+  guestIntro: {
+    label: "Praktyczne informacje",
+    title: "Dla naszych Gości",
+    body:
+      "Abyście mogli w pełni cieszyć się tym wyjątkowym dniem, zebraliśmy wszystkie najważniejsze informacje w jednym miejscu. Kilka minut wystarczy, by poznać przebieg uroczystości oraz praktyczne wskazówki dotyczące wesela.",
+    ctaLabel: "Odkryj szczegóły",
+    ctaHref: "/informacje",
+  },
+  guestDetails: {
+    title: "Informacje dla gości",
+    intro:
+      "Zebraliśmy tu wszystko, co warto wiedzieć przed naszym wielkim dniem — od drobnych prośb po praktyczne wskazówki logistyczne.",
+    topics: [
+      {
+        id: "prezenty",
+        title: "Prezenty",
+        text:
+          "Wasza obecność to dla nas najpiękniejszy podarunek. Jeśli jednak chcecie nas obdarować, będziemy wdzięczni za kopertę na wymarzoną podróż poślubną.",
+      },
+      {
+        id: "kwiaty",
+        title: "Kwiaty",
+        text:
+          "Zamiast bukietów cut-flower prosimy o drobne doniczki lub wręczenie kwiatów bezpośrednio pani młodej w dniu ślubu — chętnie zabierzemy je ze sobą po uroczystości.",
+      },
+      {
+        id: "nocleg",
+        title: "Nocleg",
+        text:
+          "Dla gości spoza Krakowa przygotowaliśmy pulę pokoi w obiekcie weselnym oraz pobliskim pensjonacie. Szczegóły rezerwacji przekażemy po potwierdzeniu obecności.",
+      },
+      {
+        id: "dresscode",
+        title: "Dress code",
+        text:
+          "Elegancja boho — naturalne tkaniny, ziemiste barwy, kwiaty we włosach. Prosimy o unikanie czystej bieli, zarezerwowanej dla panny młodej.",
+      },
+      {
+        id: "dzieci",
+        title: "Dzieci",
+        text:
+          "Kochamy najmłodszych gości! Przygotowaliśmy kącik z animacjami w sali weselnej — prosimy o wcześniejszą informację, jeśli planujecie przyjazd z maluchami.",
+      },
+      {
+        id: "poprawiny",
+        title: "Poprawiny",
+        text:
+          "Następnego dnia zapraszamy na spokojne śniadanie i kawę w ogrodzie przy sali weselnej. Start o 11:00 — bez formalnego dress code'u.",
+      },
+      {
+        id: "kontakt",
+        title: "Kontakt",
+        text:
+          "W razie pytań organizacyjnych piszcie do nas bezpośrednio — chętnie pomożemy w każdej sprawie przed i w dniu uroczystości.",
+      },
+    ],
+    dojazd: {
+      title: "Wskazówki dojazdu",
+      intro: "Dodatkowe informacje, które ułatwią Wam dotarcie na miejsce.",
+      bullets: [
+        "Przy kościele dostępny jest parking podziemny przy ul. Brackiej — pierwsza godzina bezpłatna w weekendy.",
+        "Po ceremonii bus dla gości odjeżdża spod kościoła o 16:15 bezpośrednio do sali weselnej w Tomaszowicach.",
+        "Zalecamy wcześniejszy wyjazd z domu — w sobotę ruch w centrum Krakowa bywa wzmożony.",
+        "W razie problemów z nawigacją zadzwońcie do nas — chętnie pomożemy na miejscu.",
+      ],
+    },
+  },
   quickSections: [
     {
       id: "informacje",
@@ -301,7 +428,7 @@ export const weddingData: WeddingConfig = {
         {
           title: "Nawigacja",
           description:
-            "Aktualne pinezki map dla obu lokalizacji są dostępne w sekcji lokalizacji na stronie głównej. W razie problemów kontaktujcie się z nami telefonicznie.",
+            "Aktualne pinezki map dla obu lokalizacji są dostępne w sekcji dojazdu na stronie głównej. W razie problemów kontaktujcie się z nami telefonicznie.",
         },
       ],
     },

@@ -4,9 +4,9 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const navItems = [
+  { label: "Informacje", href: "/informacje" },
   { label: "Plan wesela", href: "#timeline" },
-  { label: "Lokalizacje", href: "#locations" },
-  { label: "Informacje", href: "#quick-sections" },
+  { label: "Dojazd", href: "#dojazd" },
   { label: "Kontakt", href: "#contact" },
 ] as const;
 

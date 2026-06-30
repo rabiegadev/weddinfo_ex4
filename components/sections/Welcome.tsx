@@ -1,7 +1,8 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Container, PolaroidFrame, SectionShell } from "@/components/ui";
 import type { WeddingConfig } from "@/data/weddingData";
@@ -44,6 +45,8 @@ function FramedPhoto({
 
 export function Welcome({ welcome }: WelcomeProps) {
   const { title, subtitle, body, photos, romanticIcon } = welcome;
+  const pathname = usePathname();
+  const reduceMotion = useReducedMotion();
 
   return (
     <SectionShell
@@ -51,15 +54,15 @@ export function Welcome({ welcome }: WelcomeProps) {
       padding="lg"
       surface="transparent"
       overflowVisible
+      disableEnterAnimation
       className="relative z-10 select-none overflow-x-visible !pb-28 !pt-0 md:!pb-32 lg:!pb-36"
     >
-      {/* Treść */}
       <motion.div
+        key={`${pathname}-welcome-content`}
         className="relative z-20 pt-6 md:pt-8 lg:pt-10"
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
         <Container size="wide">
           <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-4 xl:gap-6">
@@ -67,10 +70,9 @@ export function Welcome({ welcome }: WelcomeProps) {
             <motion.div className="composition-content relative z-20 order-3 mx-auto w-full max-w-xl text-center lg:order-1 lg:col-span-5 xl:col-span-5">
               <motion.div
                 className="flex justify-center"
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.05 }}
               >
                 <div className="inline-flex items-center gap-2 whitespace-nowrap md:gap-3">
                   <h2 className="font-[family-name:var(--font-script-lg)] text-[clamp(2.75rem,7vw,4.5rem)] leading-none text-ink">
@@ -89,9 +91,8 @@ export function Welcome({ welcome }: WelcomeProps) {
 
               <motion.div
                 className="mt-5 flex justify-center md:mt-6"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
+                initial={reduceMotion ? false : { opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ delay: 0.1, duration: 0.5 }}
               >
                 <motion.div className="inline-flex items-center gap-2 whitespace-nowrap md:gap-3">
@@ -107,9 +108,8 @@ export function Welcome({ welcome }: WelcomeProps) {
 
               <motion.div
                 className="mt-4 flex items-center justify-center gap-3"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
+                initial={reduceMotion ? false : { opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ delay: 0.12, duration: 0.5 }}
                 aria-hidden="true"
               >
@@ -120,9 +120,8 @@ export function Welcome({ welcome }: WelcomeProps) {
 
               <motion.p
                 className={`${typography.body} mx-auto mt-5 max-w-md text-center`}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15, duration: 0.5 }}
               >
                 {body}
@@ -133,9 +132,8 @@ export function Welcome({ welcome }: WelcomeProps) {
             {/* Suszek */}
             <motion.div
               className="pointer-events-none order-2 flex items-center justify-center lg:order-2 lg:col-span-1 xl:col-span-1"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               aria-hidden="true"
             >
@@ -163,9 +161,8 @@ export function Welcome({ welcome }: WelcomeProps) {
               {/* Główne zdjęcie — największe, lewa strona */}
               <motion.div
                 className="absolute left-0 top-[12%] z-10 sm:top-[10%]"
-                initial={{ opacity: 0, rotate: -8, y: 20 }}
-                whileInView={{ opacity: 1, rotate: 4, y: 0 }}
-                viewport={{ once: true }}
+                initial={reduceMotion ? false : { opacity: 0, rotate: -8, y: 20 }}
+                animate={{ opacity: 1, rotate: 4, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
               >
                 <FramedPhoto
@@ -188,9 +185,8 @@ export function Welcome({ welcome }: WelcomeProps) {
               {/* Góra prawo — średnie, nachodzi na główne */}
               <motion.div
                 className="absolute right-0 top-0 z-[5] sm:right-[2%]"
-                initial={{ opacity: 0, rotate: 14, y: 16 }}
-                whileInView={{ opacity: 1, rotate: 10, y: 0 }}
-                viewport={{ once: true }}
+                initial={reduceMotion ? false : { opacity: 0, rotate: 14, y: 16 }}
+                animate={{ opacity: 1, rotate: 10, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2 }}
               >
                 <FramedPhoto tapes={["-left-3 -top-5 w-[3.75rem] -rotate-[8deg]"]}>
@@ -208,9 +204,8 @@ export function Welcome({ welcome }: WelcomeProps) {
               {/* Dół prawo — najmniejsze, nachodzi na górne */}
               <motion.div
                 className="absolute bottom-[6%] right-[4%] z-[15] sm:bottom-[8%] sm:right-[6%]"
-                initial={{ opacity: 0, rotate: 12, y: 20 }}
-                whileInView={{ opacity: 1, rotate: 7, y: 0 }}
-                viewport={{ once: true }}
+                initial={reduceMotion ? false : { opacity: 0, rotate: 12, y: 20 }}
+                animate={{ opacity: 1, rotate: 7, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.3 }}
               >
                 <FramedPhoto tapes={["-right-3 -top-4 w-[3.25rem] rotate-[12deg]"]}>

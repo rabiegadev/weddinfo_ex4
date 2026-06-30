@@ -7,6 +7,8 @@ export { FilmStripSvg } from "./FilmStripSvg";
 export { FlowerWithTape } from "./FlowerWithTape";
 export { FlowerOverlay } from "./FlowerOverlay";
 export { PaperTexture } from "./PaperTexture";
+export { SectionBackdrop } from "./SectionBackdrop";
+export type { SectionBackdropAccent, SectionBackdropVariant } from "./SectionBackdrop";
 export { TapeStrip } from "./TapeStrip";
 export type { DecorationPosition, DecorationProps, DecorationVariant } from "./types";
 export { positionClasses } from "./types";

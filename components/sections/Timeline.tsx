@@ -14,59 +14,45 @@ interface TimelineProps {
 export function Timeline({ events, title = "Harmonogram dnia" }: TimelineProps) {
   return (
     <SectionShell id="timeline" padding="md" surface="transparent" disableEnterAnimation>
-      <Container size="narrow">
-        <div className="text-center">
+      <Container size="wide">
+        <motion.div
+          className="text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+        >
           <p className={typography.label}>Program</p>
           <h2 className={`${typography.heading} mt-3`}>{title}</h2>
-        </div>
+        </motion.div>
 
-        <div className="relative mt-14 md:mt-16">
-          {/* Central line */}
-          <div
-            className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-gold/20 via-sage/40 to-gold/20 md:left-1/2 md:-translate-x-1/2"
-            aria-hidden="true"
-          />
+        <ol className="mt-10 grid gap-5 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-6 md:mt-12 md:gap-x-12 lg:gap-x-16">
+          {events.map((event, index) => (
+            <motion.li
+              key={`${event.time}-${event.title}`}
+              className="relative flex gap-4 border-l-2 border-gold/25 pl-4 md:gap-5 md:pl-5"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ delay: index * 0.06, duration: 0.45 }}
+            >
+              <span
+                className={`${typography.script} shrink-0 text-xl text-rose-deep md:w-[4.5rem] md:text-2xl`}
+              >
+                {event.time}
+              </span>
+              <div className="min-w-0 flex-1">
+                <h3 className={`${typography.headingSm} leading-snug`}>{event.title}</h3>
+                <p className={`${typography.bodySm} mt-1 leading-relaxed`}>{event.description}</p>
+                {event.location ? (
+                  <p className={`${typography.caption} mt-1.5`}>{event.location}</p>
+                ) : null}
+              </div>
+            </motion.li>
+          ))}
+        </ol>
 
-          <ol className="space-y-10 md:space-y-14">
-            {events.map((event, index) => {
-              const isEven = index % 2 === 0;
-
-              return (
-                <motion.li
-                  key={`${event.time}-${event.title}`}
-                  className={`relative flex flex-col md:flex-row md:items-center ${
-                    isEven ? "md:flex-row-reverse" : ""
-                  }`}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ delay: index * 0.08, duration: 0.5 }}
-                >
-                  {/* Dot */}
-                  <div
-                    className="absolute left-4 top-6 h-3 w-3 -translate-x-1/2 rounded-full border-2 border-gold bg-cream shadow-soft md:left-1/2"
-                    aria-hidden="true"
-                  />
-
-                  <div className={`ml-10 w-full md:ml-0 md:w-[calc(50%-2rem)] ${isEven ? "md:pr-12 md:text-right" : "md:pl-12"}`}>
-                    <span className={`${typography.script} text-2xl text-rose-deep md:text-3xl`}>
-                      {event.time}
-                    </span>
-                    <h3 className={`${typography.headingSm} mt-1`}>{event.title}</h3>
-                    <p className={`${typography.bodySm} mt-2`}>{event.description}</p>
-                    {event.location && (
-                      <p className={`${typography.caption} mt-2`}>{event.location}</p>
-                    )}
-                  </div>
-
-                  <div className="hidden flex-1 md:block" aria-hidden="true" />
-                </motion.li>
-              );
-            })}
-          </ol>
-        </div>
-
-        <div className="mt-12 flex justify-center opacity-40">
+        <div className="mt-10 flex justify-center opacity-40 md:mt-12">
           <FilmStrip />
         </div>
       </Container>

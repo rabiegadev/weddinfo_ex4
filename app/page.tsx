@@ -1,95 +1,61 @@
+import { SectionBackdrop } from "@/components/decorations";
 import {
-
   DojazdSection,
-
   Footer,
-
   Hero,
-
   QuickSections,
-
-  QuoteSection,
-
   Timeline,
-
-  TornPageSection,
-
   Welcome,
-
 } from "@/components/sections";
-
 import { weddingData } from "@/data/weddingData";
 
-
-
 export default function HomePage() {
-
-  const { images, couple, date, features, locations, welcome, quickSections, timeline, detailPages, quote, footer } =
-
-    weddingData;
-
-
+  const {
+    images,
+    couple,
+    date,
+    features,
+    welcome,
+    guestIntro,
+    timeline,
+    locations,
+    returnTransport,
+    detailPages,
+    quote,
+    footer,
+  } = weddingData;
 
   return (
-
     <main className="w-full max-w-none">
-
       <Hero
-
-        data={{ couple, date, features, locations }}
-
+        data={{ couple, date, features }}
         heroImage={images.hero}
-
+        quote={quote}
+        romanticIcon={welcome.romanticIcon}
       />
 
-
-
-      <TornPageSection id="welcome-wrap" bgSrc={images.bgPrimary} tornVariant="a" className="-mt-px">
-
+      <SectionBackdrop id="welcome-wrap" variant="light" accent="welcome">
         <Welcome welcome={welcome} />
+      </SectionBackdrop>
 
-      </TornPageSection>
+      <SectionBackdrop id="quick-wrap" variant="dark" accent="cards">
+        <QuickSections intro={guestIntro} />
+      </SectionBackdrop>
 
-
-
-      <TornPageSection id="quick-wrap" bgSrc={images.bgAlt} tornVariant="b">
-
-        <QuickSections sections={quickSections} />
-
-      </TornPageSection>
-
-
-
-      <TornPageSection id="timeline-wrap" bgSrc={images.bgPrimary} tornVariant="c">
-
+      <SectionBackdrop id="timeline-wrap" variant="light-sage" accent="timeline">
         <Timeline events={timeline} title="Harmonogram" />
+      </SectionBackdrop>
 
-      </TornPageSection>
+      <SectionBackdrop id="dojazd-wrap" variant="dark-olive" accent="route">
+        <DojazdSection
+          locations={locations}
+          returnTransport={returnTransport}
+          title={detailPages.dojazd.title}
+          intro={detailPages.dojazd.intro}
+        />
+      </SectionBackdrop>
 
-
-
-      <TornPageSection id="dojazd-wrap" bgSrc={images.bgAlt} tornVariant="b">
-
-        <DojazdSection content={detailPages.dojazd} />
-
-      </TornPageSection>
-
-
-
-      <QuoteSection quote={quote} romanticIcon={welcome.romanticIcon} />
-
-
-
-      <Footer
-        footer={footer}
-        couple={couple}
-        date={date}
-        bgSrc={images.bgPrimary}
-      />
-
+      <Footer footer={footer} couple={couple} date={date} />
     </main>
-
   );
-
 }
-

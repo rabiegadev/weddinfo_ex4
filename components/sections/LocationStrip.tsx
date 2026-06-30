@@ -81,7 +81,7 @@ function LocationColumn({
 
 export function LocationStrip({ locations }: LocationStripProps) {
   return (
-    <section id="locations" className="relative z-10 bg-cream/90 py-10 md:py-14">
+    <section id="locations" className="relative z-10 py-8 md:py-10">
       <Container size="wide">
         <motion.div
           className="grid grid-cols-1 divide-y divide-ink/10 md:grid-cols-2 md:divide-x md:divide-y-0"

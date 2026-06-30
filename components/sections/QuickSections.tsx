@@ -1,15 +1,47 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Link from "next/link";import { Container, SectionShell } from "@/components/ui";
-import type { HomeShortcutSection } from "@/data/weddingData";
+import { motion, useReducedMotion } from "framer-motion";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Container, SectionShell } from "@/components/ui";
+import type { GuestIntro } from "@/data/weddingData";
 import { typography } from "@/styles/typography";
 
 interface QuickSectionsProps {
-  sections: HomeShortcutSection[];
+  intro: GuestIntro;
 }
 
-export function QuickSections({ sections }: QuickSectionsProps) {
+const cardVariants = {
+  hidden: { opacity: 0, y: 32, scale: 0.97 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
+
+const contentVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.14, delayChildren: 0.2 },
+  },
+};
+
+const lineVariants = {
+  hidden: { opacity: 0, y: 18, filter: "blur(4px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
+
+export function QuickSections({ intro }: QuickSectionsProps) {
+  const reduceMotion = useReducedMotion();
+  const pathname = usePathname();
+
   return (
     <SectionShell
       id="quick-sections"
@@ -18,33 +50,55 @@ export function QuickSections({ sections }: QuickSectionsProps) {
       disableEnterAnimation
       className="relative"
     >
-      <Container size="wide" className="relative z-10">
-        <div className="text-center">
-          <p className={typography.label}>Praktyczne informacje</p>
-          <h2 className={`${typography.heading} mt-3`}>Dla Was w skrócie</h2>
-        </div>
-
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {sections.map((section, index) => (
-            <motion.article
-              key={section.id}
-              className="flex h-full flex-col bg-cream/90 p-6 shadow-soft md:p-7"
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.08, duration: 0.45 }}
+      <Container size="narrow" className="relative z-10">
+        <motion.div
+          key={`${pathname}-guest-intro`}
+          className="mx-auto max-w-2xl"
+          initial="hidden"
+          animate="visible"
+          variants={reduceMotion ? undefined : contentVariants}
+        >
+          <motion.div
+            variants={reduceMotion ? undefined : cardVariants}
+            className="rounded-3xl border border-cream/12 bg-cream/[0.06] px-8 py-10 shadow-[inset_0_1px_0_rgb(255_253_250/0.1),0_24px_48px_rgb(0_0_0/0.18)] backdrop-blur-sm md:px-12 md:py-14"
+          >
+            <motion.p
+              variants={reduceMotion ? undefined : lineVariants}
+              className={`${typography.label} text-center !text-gold-soft/85`}
             >
-              <h3 className={typography.headingSm}>{section.title}</h3>
-              <p className={`${typography.bodySm} mt-3 flex-1`}>{section.summary}</p>
+              {intro.label}
+            </motion.p>
+
+            <motion.h2
+              variants={reduceMotion ? undefined : lineVariants}
+              className={`${typography.heading} mt-4 text-center text-cream md:mt-5`}
+            >
+              {intro.title}
+            </motion.h2>
+
+            <motion.p
+              variants={reduceMotion ? undefined : lineVariants}
+              className={`${typography.body} mx-auto mt-6 max-w-xl text-center !leading-relaxed !text-cream/88 md:mt-7`}
+            >
+              {intro.body}
+            </motion.p>
+
+            <motion.div
+              variants={reduceMotion ? undefined : lineVariants}
+              className="mt-8 flex justify-center md:mt-10"
+            >
               <Link
-                href={section.href}
-                className={`${typography.caption} mt-6 inline-block border-b border-sage/40 pb-0.5 text-sage-deep transition-colors hover:border-rose hover:text-rose-deep`}
+                href={intro.ctaHref}
+                className={`${typography.caption} group inline-flex items-center gap-2 border-b border-gold-soft/35 pb-1 !text-gold-soft transition-colors hover:border-cream hover:!text-cream`}
               >
-                {section.ctaLabel}
+                {intro.ctaLabel}
+                <span aria-hidden="true" className="inline-block text-sm transition-transform group-hover:translate-x-0.5">
+                  →
+                </span>
               </Link>
-            </motion.article>
-          ))}
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </Container>
     </SectionShell>
   );

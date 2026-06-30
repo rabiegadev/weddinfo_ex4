@@ -1,16 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui";
 import type { WeddingConfig } from "@/data/weddingData";
 import { typography } from "@/styles/typography";
 
 const footerNav = [
+  { label: "Informacje", href: "/informacje" },
   { label: "Plan wesela", href: "#timeline" },
-  { label: "Lokalizacje", href: "#locations" },
-  { label: "Informacje", href: "#quick-sections" },
+  { label: "Dojazd", href: "#dojazd" },
   { label: "Kontakt", href: "#contact" },
 ] as const;
 
@@ -18,26 +17,12 @@ interface FooterProps {
   footer: WeddingConfig["footer"];
   couple: WeddingConfig["couple"];
   date: WeddingConfig["date"];
-  bgSrc: string;
 }
 
-export function Footer({ footer, couple, date, bgSrc }: FooterProps) {
+export function Footer({ footer, couple, date }: FooterProps) {
   return (
-    <footer id="contact" className="relative isolate overflow-hidden pb-6 pt-8 md:pb-8 md:pt-10">
-      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
-        <Image
-          src={bgSrc}
-          alt=""
-          fill
-          unoptimized
-          className="object-cover object-top brightness-[1.08] saturate-[0.95]"
-          sizes="100vw"
-          draggable={false}
-        />
-        <div className="absolute inset-0 bg-[rgb(69_53_39/0.58)]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgb(34_24_17/0.2)] via-transparent to-[rgb(34_24_17/0.18)]" />
-      </div>
-
+    <footer id="contact" className="relative overflow-hidden section-block-dark-deep pb-6 pt-8 md:pb-8 md:pt-10">
+      <div className="section-block-vignette pointer-events-none absolute inset-0" aria-hidden="true" />
       <Container size="narrow" className="relative z-10">
         <motion.div
           className="flex flex-col items-center text-center"
@@ -69,6 +54,18 @@ export function Footer({ footer, couple, date, bgSrc }: FooterProps) {
 
           <p className={`${typography.caption} mt-4 !tracking-[0.18em] !text-cream/75`}>
             {couple.displayNames.toUpperCase()} • {date.display.toUpperCase()}
+          </p>
+
+          <p className="mt-6 text-[0.625rem] tracking-[0.06em] text-cream/30">
+            Created by:{" "}
+            <a
+              href="https://weddinfo.pl"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-cream/40 transition-colors hover:text-cream/60"
+            >
+              weddinfo.pl
+            </a>
           </p>
         </motion.div>
       </Container>

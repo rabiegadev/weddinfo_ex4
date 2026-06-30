@@ -1,4 +1,7 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { RouteTransition } from "@/components/layout/RouteTransition";
 import { ScrollSiteNav } from "@/components/ui/ScrollSiteNav";
 
 interface SiteChromeProps {
@@ -11,7 +14,7 @@ export function SiteChrome({ children, partnerOne, partnerTwo }: SiteChromeProps
   return (
     <>
       <ScrollSiteNav partnerOne={partnerOne} partnerTwo={partnerTwo} />
-      {children}
+      <RouteTransition>{children}</RouteTransition>
     </>
   );
 }

@@ -13,9 +13,7 @@ export type DecorationVariant =
   | "tape"
   | "film-strip"
   | "polaroid"
-  | "brush-stroke"
-  | "torn-paper-top"
-  | "torn-paper-bottom";
+  | "brush-stroke";
 
 export interface DecorationProps {
   className?: string;

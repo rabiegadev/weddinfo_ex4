@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 
 const navItems = [
+  { label: "Informacje", href: "/informacje" },
   { label: "Plan wesela", href: "#timeline" },
-  { label: "Lokalizacje", href: "#locations" },
-  { label: "Informacje", href: "#info" },
+  { label: "Dojazd", href: "#dojazd" },
   { label: "Kontakt", href: "#contact" },
   { label: "Galeria", href: "#gallery" },
 ] as const;

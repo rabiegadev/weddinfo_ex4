@@ -12,11 +12,7 @@ interface QuoteSectionProps {
 
 export function QuoteSection({ quote, romanticIcon }: QuoteSectionProps) {
   return (
-    <section
-      id="quote"
-      className="relative isolate bg-wedding-orange torn-section-bottom torn-edge-shadow-bottom py-12 md:py-14"
-    >
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-black/10" aria-hidden="true" />
+    <section id="quote" className="relative py-12 md:py-14">
       <div className="relative z-10 mx-auto max-w-3xl px-6 text-center md:px-10">
         <motion.blockquote
           className={`${typography.subheading} !text-cream !text-lg md:!text-xl lg:!text-2xl`}

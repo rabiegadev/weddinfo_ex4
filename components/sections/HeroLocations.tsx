@@ -54,17 +54,14 @@ function LocationColumn({
 
 interface HeroLocationsProps {
   locations: WeddingConfig["locations"];
-  bgSrc: string;
 }
 
-export function HeroLocations({ locations, bgSrc }: HeroLocationsProps) {
+export function HeroLocations({ locations }: HeroLocationsProps) {
   return (
     <div id="locations" className="relative z-40 w-full">
-      <div
-        className="hero-bottom-paper relative w-full pt-8 pb-8 md:pt-9 md:pb-9"
-        style={{ backgroundImage: `url("${bgSrc}")` }}
-      >
-        <Container size="full">
+      <div className="section-block-light relative w-full border-t border-ink/8 pt-8 pb-5 md:pt-9 md:pb-6">
+        <div className="section-block-vignette pointer-events-none absolute inset-0 opacity-60" aria-hidden="true" />
+        <Container size="full" className="relative z-10">
           <div className="grid grid-cols-2 divide-x divide-ink/12">
             <LocationColumn
               iconSrc="/assets/icons/church.png"
@@ -84,10 +81,6 @@ export function HeroLocations({ locations, bgSrc }: HeroLocationsProps) {
             />
           </div>
         </Container>
-        <div
-          className="hero-locations-rip pointer-events-none absolute inset-x-0 -bottom-7 h-14 md:-bottom-8 md:h-16"
-          aria-hidden="true"
-        />
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
 interface SectionShellProps {
@@ -36,10 +37,12 @@ export function SectionShell({
   overflowVisible = false,
   disableEnterAnimation = false,
 }: SectionShellProps) {
+  const pathname = usePathname();
+  const reduceMotion = useReducedMotion();
   const overflowClass = overflowVisible ? "overflow-visible" : "overflow-hidden";
   const sectionClassName = `relative ${overflowClass} ${paddingMap[padding]} ${surfaceMap[surface]} ${className}`;
 
-  if (disableEnterAnimation) {
+  if (disableEnterAnimation || reduceMotion) {
     return (
       <section id={id} className={sectionClassName}>
         {children}
@@ -49,12 +52,12 @@ export function SectionShell({
 
   return (
     <motion.section
+      key={`${pathname}-${id ?? "section"}`}
       id={id}
       className={sectionClassName}
       initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.section>
